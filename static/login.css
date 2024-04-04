@@ -1,0 +1,79 @@
+/* Resetting default browser styles */
+body, h1, h2, h3, h4, p, ul, form, input, button {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styles */
+body {
+    font-family:Georgia, Times, 'Times New Roman', serif;
+    background-image: url('https://png.pngtree.com/background/20210714/original/pngtree-futuristic-shape-abstract-background-chemistry-technology-concept-for-website-picture-image_1250295.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-container {
+    width: 400px;
+    margin: 3% auto;
+    background-color: #3478d0;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-image: url('https://asset.gecdesigns.com/img/background-templates/colorful-gradient-abstract-background-template-1614253354657-cover.webp');
+    font-size: medium;
+
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 5px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+ .login{
+    display: block;
+    width: 45%;
+    padding: 8px;
+    background-color: #2da00d;
+    color: #fff;
+    border: none;
+    font-family:Georgia, Times, 'Times New Roman', serif;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: large;
+}
+
+.login:hover {
+    background-color: #37b742;
+} 
+
+.signup-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.signup-link a {
+    color: #d1cec6;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: none;
+}

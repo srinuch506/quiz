@@ -1,0 +1,38 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xl-4">
+        <a href="{{url_for('student_details')}}" style="text-decoration: none;color:white;">
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+           <h2 class="text-right"><i class="fas fa-book f-left"></i><span>Total Students</span></h2> 
+          </div>
+        </div>
+      </a>
+      </div>
+
+      <div class="col-md-4 col-xl-4">
+        <a href="{{url_for('admin_reports')}}" style="text-decoration: none;color:white;">
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+           <h2 class="text-right"><i class="fas fa-book f-left"></i><span>All Quiz reports</span></h2> 
+          </div>
+        </div>
+      </a>
+      </div>
+
+      <div class="col-md-4 col-xl-4">
+        <a href="{{url_for('admin_forums')}}" style="text-decoration: none;color:white;">
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+           <h2 class="text-right"><i class="fas fa-book f-left"></i><span>Discussion Forums</span></h2> 
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+  </div>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% endblock %}

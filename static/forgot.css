@@ -1,0 +1,66 @@
+body {
+    font-family:Georgia, Times, 'Times New Roman', serif;
+    background-image: url('https://png.pngtree.com/background/20210714/original/pngtree-futuristic-shape-abstract-background-chemistry-technology-concept-for-website-picture-image_1250295.jpg');
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-image: url('https://asset.gecdesigns.com/img/background-templates/colorful-gradient-abstract-background-template-1614253354657-cover.webp');
+    font-size: medium;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.submit {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+.login-link {
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: #333;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

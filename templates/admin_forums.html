@@ -1,0 +1,25 @@
+{% extends 'admin_dashboard.html' %}
+  
+{% block content %}
+{% for details in data %}
+<div class="card text-bg-active mb-3" style="max-width: 18rem;">
+    <div class="card-header"><b>Roll: </b>{{details.rollnumber}}</div>
+    <div class="card-body">
+      <p class="card-title"><b>Subject: </b>{{details.subject}}</p>
+      <p class="card-text"><b>Message: </b>{{details.message}}</p>
+    
+      <div class="input-group"><b>
+        <form action="{{url_for('admin_forums',subject=subject,message=message)}}" method="POST"></form>
+        <label for="text">Reply to message:</label>
+        <textarea id="post-content" name="reply" placeholder="Write your post here..."></textarea><br>
+        <p>
+        <button class="btn btn-success my-2 my-sm-0">Post</button>
+      </form>
+    
+    <a href="{{url_for('postview')}}"><button class="btn btn-success my-2 my-sm-0">View
+    </button></a></p></b></div>
+    
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

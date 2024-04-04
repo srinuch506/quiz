@@ -1,0 +1,111 @@
+{% extends 'student_base.html' %}
+{% block style %}
+<style>
+    body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #c6dc76;
+    margin: 0;
+    padding: 0;
+    font-size: large;
+}
+
+.container {
+    width: 30%;
+    margin: 20px auto;
+    margin-top: 3%;
+    background-image: url('https://asset.gecdesigns.com/img/background-templates/colorful-gradient-abstract-background-template-1614253354657-cover.webp');
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+#discussion {
+    margin-bottom: 20px;
+}
+
+.post {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    margin-bottom: 10px;
+}
+
+#post-form {
+    margin-top: 20px;
+    border-radius: 10px;
+
+}
+
+textarea {
+    width: 205%;
+    height: 100px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #07920e ;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color:#007bff;
+}
+.input{
+    width: 90%;
+}
+.input-group {
+    margin-bottom: 5px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 180%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Discussion Forum</h1>
+        <div id="discussion">
+            <!-- Discussion posts will be dynamically inserted here -->
+        </div>
+        <form id="post-form" method="POST">
+            <div class="input-group"><b>
+                <label for="username">Roll Number:</label>
+                <input type="text" id="rollnumber" placeholder="Enter Roll Number" name="roll" value="{{roll}}" required readonly>
+            </div>
+            <div class="input-group">
+                <label for="password">Subject:</label>
+                <input type="text" id="subject" placeholder="Enter subject" name="subject" value="{{subject}}" required readonly>
+            </div>
+            <div class="input-group">
+                <label for="text">Share your experiance:</label>
+                <textarea id="post-content" name="message" placeholder="Write your post here..."></textarea>
+            </b></div>
+            <center>
+            <button type="submit">Submit</button></center>
+        </form>
+
+    </div>
+{% endblock %}

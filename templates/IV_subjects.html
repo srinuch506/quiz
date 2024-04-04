@@ -1,0 +1,45 @@
+
+{% extends 'student_dashboard.html' %}
+  
+{% block content %}
+<style>
+  .container{
+    margin-top: 3%;
+    margin:center;
+    width: 60%;
+    height: auto;
+    font-size: large;
+    text-align: justify;
+  }
+</style>
+<div class="container">
+<table class="table table-sm">
+    <thead>
+      <tr class="table-danger">
+        <th scope="col">Subject Code</th>
+        <th scope="col">Subject Name</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Attempt Quiz</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-success">
+        <th scope="row">R2311051</th>
+        <td>Deep Learning</td>
+        <td>5 Minutes</td>
+        <td class="text"><a class="btn btn-primary btn-sm" style="border-radius:0px;" href="{{url_for('dl')}}"><span class="glyphicon glyphicon-check"></span> Start Quiz</a></td>
+      </tr>   
+      <tr class="table-active">
+        <th scope="row">R2311053</th>
+        <td>Cloud Computing</td>
+        <td>5 Minutes</td>
+        <td class="text"><a class="btn btn-primary btn-sm" style="border-radius:0px;" href="{{url_for('cc')}}"><span class="glyphicon glyphicon-check"></span> Start Quiz</a></td>
+        
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+
+{% endblock %}

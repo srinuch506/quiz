@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Networks Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6e152;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #d9ccb0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question-text {
+            font-weight: bold;
+            color: #333;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        .options label {
+            margin-left: 10px;
+            color: #666;
+        }
+        .btn {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="subject">Computer Networks Quiz</h1>
+        
+        <!-- Question 1 -->
+        <div class="question">
+            <p class="question-text">1. Which layer of the OSI model is responsible for routing?</p>
+            <ul class="options">
+                <li><input type="radio" name="q1" id="q1a" value="a"><label for="q1a">Physical Layer</label></li>
+                <li><input type="radio" name="q1" id="q1b" value="b"><label for="q1b">Data Link Layer</label></li>
+                <li><input type="radio" name="q1" id="q1c" value="c"><label for="q1c">Network Layer</label></li>
+                <li><input type="radio" name="q1" id="q1d" value="d"><label for="q1d">Transport Layer</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p class="question-text">2. What is the purpose of DHCP?</p>
+            <ul class="options">
+                <li><input type="radio" name="q2" id="q2a" value="a"><label for="q2a">To assign IP addresses to devices dynamically</label></li>
+                <li><input type="radio" name="q2" id="q2b" value="b"><label for="q2b">To provide secure communication over the internet</label></li>
+                <li><input type="radio" name="q2" id="q2c" value="c"><label for="q2c">To translate domain names to IP addresses</label></li>
+                <li><input type="radio" name="q2" id="q2d" value="d"><label for="q2d">To establish a direct connection between two computers</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p class="question-text">3. What protocol is used for secure communication over the internet?</p>
+            <ul class="options">
+                <li><input type="radio" name="q3" id="q3a" value="a"><label for="q3a">HTTP</label></li>
+                <li><input type="radio" name="q3" id="q3b" value="b"><label for="q3b">FTP</label></li>
+                <li><input type="radio" name="q3" id="q3c" value="c"><label for="q3c">SMTP</label></li>
+                <li><input type="radio" name="q3" id="q3d" value="d"><label for="q3d">HTTPS</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p class="question-text">4. Which device is used to connect multiple computers within a local area network (LAN)?</p>
+            <ul class="options">
+            <li><input type="radio" name="q4" id="q4a" value="a"><label for="q4a">Router</label></li>
+            <li><input type="radio" name="q4" id="q4b" value="b"><label for="q4b">Switch</label></li>
+            <li><input type="radio" name="q4" id="q4c" value="c"><label for="q4c">Modem</label></li>
+            <li><input type="radio" name="q4" id="q4d" value="d"><label for="q4d">Hub</label></li>
+            </ul>
+            </div>
+                <!-- Question 5 -->
+    <div class="question">
+        <p class="question-text">5. What is the purpose of ARP?</p>
+        <ul class="options">
+            <li><input type="radio" name="q5" id="q5a" value="a"><label for="q5a">To map IP addresses to MAC addresses</label></li>
+            <li><input type="radio" name="q5" id="q5b" value="b"><label for="q5b">To route packets between networks</label></li>
+            <li><input type="radio" name="q5" id="q5c" value="c"><label for="q5c">To encrypt data for secure transmission</label></li>
+            <li><input type="radio" name="q5" id="q5d" value="d"><label for="q5d">To establish a secure tunnel over the internet</label></li>
+        </ul>
+    </div>
+
+    <!-- Submit Button -->
+    
+    <center>
+        <button class="btn" id="submit-btn"><h3>Submit</h3></button>
+        <p id="score"></p>
+        </div>
+    </center>    
+</div>
+
+<!-- Script for Quiz Submission -->
+<script>
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        let score = 0;
+        const correctAnswers = ["c", "a", "d", "b", "a"]; // Correct answers
+        for (let i = 1; i <= 5; i++) {
+            const answer = document.querySelector(`input[name="q${i}"]:checked`);
+            if (answer && answer.value === correctAnswers[i - 1]) {
+                score++;
+            }
+        }
+        //document.getElementById('score').innerText = 'Your score: ' + score + '/5';
+        
+        // Get the subject name
+        const subjectName = document.getElementById('subject').innerText;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/submitQuiz');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Quiz submitted successfully!');
+                window.location.href = '/quiz_reports'; // Redirect to student_dashboard route upon successful submission
+            }else if (xhr.status === 404){
+                alert('Exam Already Attempted')
+            } else {
+                alert('Failed to submit quiz. Please try again later.');
+            }
+        };
+        xhr.send(JSON.stringify({ score: score, subject: subjectName })); // Include subject name in the data
+    });
+</script>
+</body>
+</html>

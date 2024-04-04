@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='login.css')}}"/>
+{% endblock %}
+{% block content %}
+    <div class="login-container">
+        <h2>Student Login</h2>
+        <form method="POST">
+            <div class="input-group"><b>
+                <label for="username">Roll Number</label>
+                <input type="text" id="rollnumber" placeholder="Enter Roll Number" name="roll" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter Password" name="password" required>
+            </b></div>
+            <center>
+            <button type="submit" class="login">Login</button>
+            <p class="signup-link"><a href="{{url_for('forgot')}}">Forgot Password</a></p>
+            <p class="signup-link">Don't have an account? <a href="{{url_for('signup')}}">Sign up</a></p></center>
+        </form>
+    </div>
+{% endblock %}

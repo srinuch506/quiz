@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6e152;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #d9ccb0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question-text {
+            font-weight: bold;
+            color: #333;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        .options label {
+            margin-left: 10px;
+            color: #666;
+        }
+    .btn {
+    display: block;
+    width: 25%;
+    padding:0;
+    background-color: #d5890e;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+        <h1 id="subject">C Programming Quiz</h1>
+        <!-- Question 1 -->
+        <div class="question">
+            <p class="question-text">1. What is the size of int data type in C?</p>
+            <ul class="options">
+                <li><input type="radio" name="q1" id="q1a" value="a"><label for="q1a">2 bytes</label></li>
+                <li><input type="radio" name="q1" id="q1b" value="b"><label for="q1b">4 bytes</label></li>
+                <li><input type="radio" name="q1" id="q1c" value="c"><label for="q1c">8 bytes</label></li>
+                <li><input type="radio" name="q1" id="q1d" value="d"><label for="q1d">Depends on the system</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p class="question-text">2. Which of the following is not a valid variable name in C?</p>
+            <ul class="options">
+                <li><input type="radio" name="q2" id="q2a" value="a"><label for="q2a">_myVar</label></li>
+                <li><input type="radio" name="q2" id="q2b" value="b"><label for="q2b">123var</label></li>
+                <li><input type="radio" name="q2" id="q2c" value="c"><label for="q2c">var_123</label></li>
+                <li><input type="radio" name="q2" id="q2d" value="d"><label for="q2d">myVar</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p class="question-text">3. What is the correct syntax to declare an array in C?</p>
+            <ul class="options">
+                <li><input type="radio" name="q3" id="q3a" value="a"><label for="q3a">array myArray[size];</label></li>
+                <li><input type="radio" name="q3" id="q3b" value="b"><label for="q3b">int myArray[size];</label></li>
+                <li><input type="radio" name="q3" id="q3c" value="c"><label for="q3c">myArray[size];</label></li>
+                <li><input type="radio" name="q3" id="q3d" value="d"><label for="q3d">int[size] myArray;</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p class="question-text">4. What is the output of the following code snippet?<br><h4> x = 5; printf("%d", ++x);</h4></p>
+            <ul class="options">
+                <li><input type="radio" name="q4" id="q4a" value="a"><label for="q4a">5</label></li>
+                <li><input type="radio" name="q4" id="q4b" value="b"><label for="q4b">6</label></li>
+                <li><input type="radio" name="q4" id="q4c" value="c"><label for="q4c">Compiler error</label></li>
+                <li><input type="radio" name="q4" id="q4d" value="d"><label for="q4d">Undefined behavior</label></li>
+            </ul>
+        </div>
+        <!-- Question 5 -->
+        <div class="question">
+            <p class="question-text">5. What is the correct syntax to declare a pointer in C?</p>
+            <ul class="options">
+                <li><input type="radio" name="q5" id="q5a" value="a"><label for="q5a">int *ptr;</label></li>
+                <li><input type="radio" name="q5" id="q5b" value="b"><label for="q5b">ptr *int;</label></li>
+                <li><input type="radio" name="q5" id="q5c" value="c"><label for="q5c">ptr int;</label></li>
+                <li><input type="radio" name="q5" id="q5d" value="d"><label for="q5d">int ptr;</label></li>
+            </ul>
+        </div>
+    <center>
+        <button class="btn" id="submit-btn"><h3>Submit</h3></button>
+        <p id="score"></p>
+    </center>
+</div>
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            let score = 0;
+            const correctAnswers = ['b', 'b', 'b', 'a', 'a'];
+            for (let i = 1; i <= 5; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer && answer.value === correctAnswers[i - 1]) {
+                    score++;
+                }
+            }
+            //document.getElementById('score').innerText = 'Your score: ' + score + '/5';
+            
+            // Get the subject name
+            const subjectName = document.getElementById('subject').innerText;
+    
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/submitQuiz');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert('Quiz submitted successfully!');
+                    window.location.href = '/quiz_reports'; // Redirect to student_dashboard route upon successful submission
+                }else if (xhr.status === 404){
+                    alert('Exam Already Attempted')
+                } else {
+                    alert('Failed to submit quiz. Please try again later.');
+                }
+            };
+            xhr.send(JSON.stringify({ score: score, subject: subjectName })); // Include subject name in the data
+        });
+    </script>
+    
+
+</body>
+</html>

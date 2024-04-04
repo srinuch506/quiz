@@ -1,0 +1,40 @@
+
+{% extends 'admin_base.html' %}
+  
+{% block content %}
+<style>
+      .container{
+        margin-top: 3%;
+        margin:center;
+        width: 70%;
+      
+      }
+</style>
+<div class="container">
+<div class="table-responsive-sm">
+<table class="table table-sm">
+    <thead>
+      <tr class="table-danger">
+        <th scope="col">Sl.No</th>
+        <th scope="col">Roll Number</th>
+        <th scope="col">Subject Name</th>
+        <th scope="col">Total Marks</th>
+        <th scope="col">Your Score</th>
+      </tr>
+    </thead>
+    <tbody >
+      {% for details in data %}
+      <tr class="table-warning">
+        <th scope="row">{{loop.index}}</th>
+        <td> {{details.rollnumber}}</td>
+        <td> {{details.subject}}</td>
+        <td>{{details.total}} </td>   
+        <td>{{details.score}} </td>    
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}
