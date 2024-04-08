@@ -8,15 +8,15 @@ from sendmail import *
 app=Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
 app.config['SESSION_TYPE'] = 'Filesystem'
-# db=os.environ['RDS_DB_NAME']
-# user=os.environ['RDS_USERNAME']
-# password=os.environ['RDS_PASSWORD']
-# host=os.environ['RDS_HOSTNAME']
-# port=os.environ['RDS_PORT']
+db=os.environ['RDS_DB_NAME']
+user=os.environ['RDS_USERNAME']
+password=os.environ['RDS_PASSWORD']
+host=os.environ['RDS_HOSTNAME']
+port=os.environ['RDS_PORT']
 bcrypt=Bcrypt(app)
 
-conn=MySQLConnectionPool(host='localhost',user='root',password='CHsrinu@506',db='master',pool_name='login',pool_size=3,pool_reset_session=True)
-#conn=MySQLConnectionPool(host=host,user=user,password=password,db=db,pool_name='login',pool_size=3,pool_reset_session=True)
+#conn=MySQLConnectionPool(host='localhost',user='root',password='CHsrinu@506',db='master',pool_name='login',pool_size=3,pool_reset_session=True)
+conn=MySQLConnectionPool(host=host,user=user,password=password,db=db,pool_name='login',pool_size=3,pool_reset_session=True)
 try:
     mydb=conn.get_connection()
     cursor=mydb.cursor(buffered=True)
