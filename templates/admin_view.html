@@ -1,5 +1,5 @@
 
-{% extends 'admin_base.html' %}
+{% extends 'admin_dashboard.html' %}
   
 {% block content %}
 <style>
@@ -18,8 +18,10 @@
         <th scope="col">Sl.No</th>
         <th scope="col">Roll Number</th>
         <th scope="col">Subject Name</th>
-        <th scope="col">Total Marks</th>
-        <th scope="col">Your Marks</th>
+        <th scope="col">Message</th>
+        <th scope="col">Replied Message</th>
+        <th scope="col">Delete Message</th>
+
       </tr>
     </thead>
     <tbody >
@@ -27,12 +29,12 @@
       <tr class="table-warning">
         <th scope="row">{{loop.index}}</th>
         <td> {{details.rollnumber}}</td>
-        <td> {{details.subject}}</td>
-        <td>{{details.total}} </td>   
-        <td>{{details.score}} </td>    
+        <td> {{details.subject}}</td> 
+        <td> {{details.message}}</td> 
+        <td> {{details.reply}} </td>  
+        <td class="text"><a class="btn btn-danger btn-active btn-sm" style="border-radius:0px;" href="{{url_for('admin_delete_view',roll=details.rollnumber,subject=details.subject)}}">Delete</a></td>
       </tr>
       {% endfor %}
-      
     </tbody>
   </table>
 </div>

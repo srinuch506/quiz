@@ -7,13 +7,16 @@ body, h1, h2, h3, h4, p, ul, form, input, button {
 /* Basic styles */
 body {
     font-family: Arial, sans-serif;
+    background-image: url('https://png.pngtree.com/background/20210714/original/pngtree-futuristic-shape-abstract-background-chemistry-technology-concept-for-website-picture-image_1250295.jpg');
+    font-size: medium;
     background-color: #f4f4f4;
 }
 
 .otp-container {
     width: 400px;
     margin: 100px auto;
-    background-color: #fff;
+    background-image: url('https://asset.gecdesigns.com/img/background-templates/colorful-gradient-abstract-background-template-1614253354657-cover.webp');
+    background-color: #3478d0;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -31,7 +34,7 @@ h2 {
 
 .input-group input {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
@@ -53,10 +56,10 @@ h2 {
     color: #333;
 }
 
-.btn {
+.otp-btn {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     background-color: #333;
     color: #fff;
     border: none;

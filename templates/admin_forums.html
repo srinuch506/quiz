@@ -1,25 +1,32 @@
+
 {% extends 'admin_dashboard.html' %}
   
 {% block content %}
-{% for details in data %}
-<div class="card text-bg-active mb-3" style="max-width: 18rem;">
-    <div class="card-header"><b>Roll: </b>{{details.rollnumber}}</div>
-    <div class="card-body">
-      <p class="card-title"><b>Subject: </b>{{details.subject}}</p>
-      <p class="card-text"><b>Message: </b>{{details.message}}</p>
-    
-      <div class="input-group"><b>
-        <form action="{{url_for('admin_forums',subject=subject,message=message)}}" method="POST"></form>
-        <label for="text">Reply to message:</label>
-        <textarea id="post-content" name="reply" placeholder="Write your post here..."></textarea><br>
-        <p>
-        <button class="btn btn-success my-2 my-sm-0">Post</button>
-      </form>
-    
-    <a href="{{url_for('postview')}}"><button class="btn btn-success my-2 my-sm-0">View
-    </button></a></p></b></div>
-    
-    </div>
+<div class="container">
+  <div class="row justify-content-center">
+    {% for details in data %}
+      <div class="col-md-3 mb-4">
+        <div class="card text-bg-active" style="max-width: 18rem;">
+          <div class="card-header"><b>Roll: </b>{{ details.rollnumber }}</div>
+          <div class="card-body">
+            <p class="card-title"><b>Subject: </b>{{ details.subject }}</p>
+            <p class="card-text"><b>Message: </b>{{ details.message }}</p>
+            <!-- <form action="{{ url_for('admin_forums', subject=details.subject, message=details.message) }}" method="POST">
+              <div class="form-group">
+                <label for="reply"><b>Reply to message:</b></label>
+                <textarea id="post-content" name="reply" class="form-control" placeholder="Write your post here..."></textarea><br>
+              </div>
+              <button type="submit" class="btn btn-success my-2 my-sm-0">Post</button> -->
+              <a href="{{ url_for('admin_view') }}" class="btn btn-success">View</a>
+              <a href="{{ url_for('admin_delete_forum', roll=details.rollnumber, subject=details.subject) }}" class="btn btn-success">Delete</a>
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+      {% if loop.index % 4 == 0 %}
+        </div><div class="row justify-content-center">
+      {% endif %}
+    {% endfor %}
   </div>
-{% endfor %}
+</div>
 {% endblock %}

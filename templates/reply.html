@@ -1,24 +1,31 @@
 {% extends 'student_dashboard.html' %}
   
 {% block content %}
-{% for roll,subject,message in data %}
-<div class="card text-bg-active mb-3" style="max-width: 18rem;">
-    <div class="card-header"><b>Roll: </b>{{roll}}</div>
-    <div class="card-body">
-      <p class="card-title"><b>Subject: </b>{{subject}}</p>
-      <p class="card-text"><b>Message: </b>{{message}}</p>
-      
-      <div class="input-group"><b>
-        <form action="{{url_for('viewpost',subject=subject,message=message)}}" method="POST">
-        <label for="text">Reply to message:</label>
-        <textarea id="post-content" name="reply" placeholder="Write your post here..." required></textarea>
-      <p>
-        <button class="btn btn-success my-2 my-sm-0">Post</button></p>
-      </form>
-    <a href="{{url_for('postview')}}"><button class="btn btn-success my-2 my-sm-0">View
-    </button></a></b></div>
-    
-    </div>
+<div class="container">
+  <div class="row justify-content-center">
+    {% for roll, subject, message in data %}
+      <div class="col-md-3 mb-4">
+        <div class="card text-bg-active">
+          <div class="card-header"><b>Roll: </b>{{ roll }}</div>
+          <div class="card-body">
+            <p class="card-title"><b>Subject: </b>{{ subject }}</p>
+            <p class="card-text"><b>Message: </b>{{ message }}</p>
+            <form action="{{ url_for('viewpost', subject=subject, message=message) }}" method="POST">
+              <div class="form-group">
+                <label for="reply">Reply to message:</label>
+                <textarea class="form-control" id="reply" name="reply" placeholder="Write your post here..." required></textarea>
+              </div>
+              <p>
+              <button type="submit" class="btn btn-success">Post</button>
+              <a href="{{ url_for('postview') }}" class="btn btn-success">View</a>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% if loop.index % 4 == 0 %}
+        </div><div class="row justify-content-center">
+      {% endif %}
+    {% endfor %}
   </div>
-{% endfor %}
+</div>
 {% endblock %}

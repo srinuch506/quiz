@@ -10,6 +10,7 @@ body {
     background-image: url('https://png.pngtree.com/background/20210714/original/pngtree-futuristic-shape-abstract-background-chemistry-technology-concept-for-website-picture-image_1250295.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    font-size: medium;
 }
 
 .login-container {

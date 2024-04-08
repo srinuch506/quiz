@@ -19,6 +19,7 @@
         <th scope="col">Roll Number</th>
         <th scope="col">Full Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Delete Student</th>
       </tr>
     </thead>
     <tbody >
@@ -27,7 +28,8 @@
         <th scope="row">{{loop.index}}</th>
         <td> {{details.rollnumber}}</td>
         <td> {{details.name}}</td>
-        <td>{{details.email}} </td>      
+        <td>{{details.email}} </td>
+        <td class="text"><a class="btn btn-danger btn-active btn-sm" style="border-radius:0px;" href="{{url_for('admin_delete_student',roll=details.rollnumber)}}">Delete</a></td>      
       </tr>
       {% endfor %}
       

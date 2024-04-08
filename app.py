@@ -8,15 +8,15 @@ from sendmail import *
 app=Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
 app.config['SESSION_TYPE'] = 'Filesystem'
-db=os.environ['RDS_DB_NAME']
-user=os.environ['RDS_USERNAME']
-password=os.environ['RDS_PASSWORD']
-host=os.environ['RDS_HOSTNAME']
-port=os.environ['RDS_PORT']
+# db=os.environ['RDS_DB_NAME']
+# user=os.environ['RDS_USERNAME']
+# password=os.environ['RDS_PASSWORD']
+# host=os.environ['RDS_HOSTNAME']
+# port=os.environ['RDS_PORT']
 bcrypt=Bcrypt(app)
 
-#conn=MySQLConnectionPool(host='localhost',user='root',password='CHsrinu@506',db='master',pool_name='login',pool_size=3,pool_reset_session=True)
-conn=MySQLConnectionPool(host=host,user=user,password=password,db=db,pool_name='login',pool_size=3,pool_reset_session=True)
+conn=MySQLConnectionPool(host='localhost',user='root',password='CHsrinu@506',db='master',pool_name='login',pool_size=3,pool_reset_session=True)
+#conn=MySQLConnectionPool(host=host,user=user,password=password,db=db,pool_name='login',pool_size=3,pool_reset_session=True)
 try:
     mydb=conn.get_connection()
     cursor=mydb.cursor(buffered=True)
@@ -180,11 +180,11 @@ def student_logout():
 def admin_logout():
     if session.get('admin'):
         session.pop('admin')
-        return redirect(url_for('admin'))
+        return redirect(url_for('adminlogin'))
 
     else:
         flash('Please Login to continue')
-        return redirect(url_for('admin'))
+        return redirect(url_for('adminlogin'))
 
 @app.route('/forgot',methods=['GET','POST'])
 def forgot():
@@ -244,7 +244,7 @@ def verify(token):
         return redirect(url_for('forgot'))
 
 @app.route('/adminlogin',methods=['GET','POST'])
-def admin():
+def adminlogin():
     if request.method=='POST':  
         username=request.form['username'] #quizadmin@gec
         password=request.form['password'] #gec@2024
@@ -545,7 +545,7 @@ def discussion(subject):
         try:
             mydb=conn.get_connection()
             cursor=mydb.cursor(buffered=True)
-            cursor.execute('select count(*) from discussion where subject=%s',(subject,))
+            cursor.execute('select count(*),rollnumber from discussion where subject=%s and rollnumber=%s',(subject,roll))
             count_sub=cursor.fetchone()[0]
             if count_sub==1:
                 flash('You are already submitted the Discussion form\n Go to see in discussion forms')
@@ -591,13 +591,13 @@ def forums():
         flash('Please login to continue')
         return redirect(url_for('login'))
 
-@app.route('/admin_reports')
-def admin_reports():
+@app.route('/admin_reports/<roll>')
+def admin_reports(roll):
     if session.get('admin'):
         try:
             mydb=conn.get_connection()
             cursor=mydb.cursor(buffered=True,dictionary=True)
-            cursor.execute('select * from report order by rollnumber')
+            cursor.execute('select *from report where rollnumber=%s',(roll,))
             data = cursor.fetchall()
             if data:
                 return render_template('admin_reports.html',data=data)
@@ -614,6 +614,29 @@ def admin_reports():
         flash('Please login to continue')
         return redirect(url_for('adminlogin'))
   
+@app.route('/admin_student_reports')
+def admin_student_reports():
+    if session.get('admin'):
+        try:
+            mydb=conn.get_connection()
+            cursor=mydb.cursor(buffered=True,dictionary=True)
+            cursor.execute('select DISTINCT rollnumber from report order by rollnumber')
+            data = cursor.fetchall()
+            if data:
+                return render_template('admin_student_reports.html',data=data)
+            else:
+                flash('No reports are found')
+                return redirect(url_for('student_dashboard'))
+        except Exception as e:
+            print(e)
+        finally:
+            if mydb.is_connected():
+                mydb.close()
+                cursor.close()
+    else:
+        flash('Please login to continue')
+        return redirect(url_for('adminlogin'))
+   
 @app.route('/admin_forums',methods=['GET','POST'])
 def admin_forums():
     if session.get('admin'):
@@ -626,7 +649,7 @@ def admin_forums():
                 return render_template('admin_forums.html',data=data)
             else:
                 flash('No forums are found')
-                return redirect(url_for('student_dashboard'))
+                return redirect(url_for('admin_dashboard'))
         except Exception as e:
             print(e)
         finally:
@@ -636,6 +659,27 @@ def admin_forums():
     else:
         flash('Please login to continue')
         return redirect(url_for('adminlogin'))
+
+@app.route('/admin_delete_forum/<roll>/<subject>',methods=['GET','POST'])
+def admin_delete_forum(roll,subject):
+    if session.get('admin'):
+        try:
+            mydb=conn.get_connection()
+            cursor=mydb.cursor(buffered=True,dictionary=True)
+            cursor.execute('delete from reply where rollnumber=%s and subject=%s',(roll,subject))
+            cursor.execute('delete from discussion where rollnumber=%s and subject=%s',(roll,subject))
+            mydb.commit()
+            return redirect(url_for('admin_forums'))
+        except Exception as e:
+            print(e)
+        finally:
+            if mydb.is_connected():
+                mydb.close()
+                cursor.close()
+    else:
+        flash('Please login to continue')
+        return redirect(url_for('adminlogin'))
+
 
 @app.route('/student_details')
 def student_details():
@@ -685,7 +729,7 @@ def viewpost(subject,message):
 
 @app.route('/postview',methods=['GET','POST'])
 def postview():
-    if session.get('user') or session.get('admin'):
+    if session.get('user'):
         try:
             mydb=conn.get_connection()
             cursor=mydb.cursor(buffered=True,dictionary=True)
@@ -702,7 +746,66 @@ def postview():
         flash('Please login to continue')
         return redirect(url_for('login'))
 
+@app.route('/admin_view',methods=['GET','POST'])
+def admin_view():
+    if session.get('admin'):
+        try:
+            mydb=conn.get_connection()
+            cursor=mydb.cursor(buffered=True,dictionary=True)
+            cursor.execute('select *from reply')
+            data=cursor.fetchall()
+            return render_template('admin_view.html',data=data)
+        except Exception as e:
+            print(e)
+        finally:
+            if mydb.is_connected():
+                mydb.close()
+                cursor.close()
+    else:
+        flash('Please login to continue')
+        return redirect(url_for('adminlogin'))
 
+@app.route('/admin_delete_view/<roll>/<subject>',methods=['GET','POST'])
+def admin_delete_view(roll,subject):
+    if session.get('admin'):
+        try:
+            mydb=conn.get_connection()
+            cursor=mydb.cursor(buffered=True,dictionary=True)
+            cursor.execute('delete from reply where rollnumber=%s and subject=%s',(roll,subject))
+            cursor.execute('delete from discussion where rollnumber=%s and subject=%s',(roll,subject))
+            mydb.commit()
+            return redirect(url_for('admin_view'))
+        except Exception as e:
+            print(e)
+        finally:
+            if mydb.is_connected():
+                mydb.close()
+                cursor.close()
+    else:
+        flash('Please login to continue')
+        return redirect(url_for('adminlogin'))
+
+@app.route('/admin_delete_student/<roll>',methods=['GET','POST'])
+def admin_delete_student(roll):
+    if session.get('admin'):
+        try:
+            mydb=conn.get_connection()
+            cursor=mydb.cursor(buffered=True,dictionary=True)
+            cursor.execute('delete from discussion where rollnumber=%s',(roll,))
+            cursor.execute('delete from reply where rollnumber=%s',(roll,))
+            cursor.execute('delete from report where rollnumber=%s',(roll,))
+            cursor.execute('delete from student where rollnumber=%s',(roll,))
+            mydb.commit()
+            return redirect(url_for('student_details'))
+        except Exception as e:
+            print(e)
+        finally:
+            if mydb.is_connected():
+                mydb.close()
+                cursor.close()
+    else:
+        flash('Please login to continue')
+        return redirect(url_for('adminlogin'))
 
 
 

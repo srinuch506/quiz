@@ -17,9 +17,7 @@
       <tr class="table-danger">
         <th scope="col">Sl.No</th>
         <th scope="col">Roll Number</th>
-        <th scope="col">Subject Name</th>
-        <th scope="col">Total Marks</th>
-        <th scope="col">Your Marks</th>
+        <th scope="col">No.of Quizes Attempted</th>
       </tr>
     </thead>
     <tbody >
@@ -27,9 +25,7 @@
       <tr class="table-warning">
         <th scope="row">{{loop.index}}</th>
         <td> {{details.rollnumber}}</td>
-        <td> {{details.subject}}</td>
-        <td>{{details.total}} </td>   
-        <td>{{details.score}} </td>    
+        <td class="text"><a class="btn btn-danger btn-Warning btn-sm" style="border-radius:0px;" href="{{url_for('admin_reports',roll=details.rollnumber)}}">All Quizes</a></td>
       </tr>
       {% endfor %}
       
